@@ -5,7 +5,7 @@
 * otherwise return null
 *
 */
-function reorder(aChildren, bChildren, key = 'key') {
+export default function reorder(aChildren, bChildren, key = 'key') {
 	const bChildIndex = keyIndex(bChildren);
 	const bKeys = bChildIndex.keys;
     const bFree = bChildIndex.free;
@@ -142,40 +142,3 @@ function keyIndex(children, key = 'key') {
 		free
 	};
 }
-
-let one = [{a: 8}, {key: 1, aa: 1}, {key: 3, aa: 88}, {key: 2, aa: 8}];
-let two = [{dd: 2}, {key: 2, aa: 8}, {key: 3, aa: 88}];
-
-console.log('old:');
-console.log(one);
-console.log('new:');
-console.log(two);
-const now = 
-const moves = reorder(one, two);
-console.log('moves: ');
-console.log(moves);
-
-if (moves === null) {
-	console.log("The old to the new is can't walk.");
-	process.exit(0);
-	return ;
-}
-
-for (let i = 0; i < moves.length; i++) {
-	const move = moves[i];
-	if (move.type === 'delete') {
-		one.splice(move.index, 1);
-	} else {
-		one.splice(move.index, 0, move.item);
-	}
-}
-for (let i = 0; i < one.length; i ++) {
-	if (one[i].key !== two[i].key) {
-		console.log('error');
-		process.exit(0);
-	}
-}
-
-console.log();
-console.log('Test success.');
-console.log();
